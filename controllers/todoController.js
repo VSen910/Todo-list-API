@@ -30,6 +30,10 @@ exports.getTodo = catchAsync(async (req, res, next) => {
 })
 
 exports.createTodo = catchAsync(async (req, res, next) => {
+    if(req.body.task.trim() === '') {
+        return next(new AppError('Please provide a Todo task', 400))
+    }
+
     const newTodo = await Todo.create(req.body)
 
     res.status(201).json({
