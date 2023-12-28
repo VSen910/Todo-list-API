@@ -18,7 +18,7 @@ exports.getTodo = catchAsync(async (req, res, next) => {
     const todo = await Todo.findById(req.params.id)
 
     if(!todo) {
-        return next(new AppError(`No todo by the id ${req.params.id} exists`), 404)
+        return next(new AppError(`No todo by the id ${req.params.id} exists`, 404))
     }
 
     res.status(200).json({
